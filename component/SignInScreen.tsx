@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, Alert } from 'react-native';
+import { View, Text, TextInput, Button, Alert, StyleSheet, TouchableOpacity } from 'react-native';
 import { supabase } from '../lib/supabase';
 
 const SignInScreen = ({ navigation }: any) => {
@@ -57,14 +57,59 @@ const SignInScreen = ({ navigation }: any) => {
   };
 
   return (
-    <View>
-      <Text>Sign In</Text>
-      <TextInput placeholder="Email" value={email} onChangeText={setEmail} />
-      <TextInput placeholder="Password" value={password} secureTextEntry onChangeText={setPassword} />
-      <Button title="Sign In" onPress={handleSignIn} />
-      <Button title="Go to Sign Up" onPress={() => navigation.navigate('SignUp')} />
+    <View style={styles.container}>
+      <View style={styles.inputContainer}>
+        <Text style={styles.title}>Sign In</Text>
+        <TextInput style={styles.input} placeholder="Email" value={email} onChangeText={setEmail} />
+        <TextInput style={styles.input} placeholder="Password" value={password} secureTextEntry onChangeText={setPassword} />
+      </View>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.button} onPress={handleSignIn} />
+        <Text style={styles.buttonText}>Sign In</Text>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('SignUp')} />
+        <Text style={styles.buttonText}>Sign Up</Text>
+      </View>
     </View>
+
   );
 };
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingHorizontal: 20,
+    backgroundColor: '#fff',
+  },
+  inputContainer: {
+    marginTop: 80,
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: 24,
+    marginBottom: 20,
+    fontWeight: 'bold',
+  },
+  input: {
+    width: '100%',
+    height: 50,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 5,
+    marginBottom: 15,
+    paddingHorizontal: 10,
+  },
+  buttonContainer: {
+    marginTop: 20,
+    alignItems: 'center',
+  },
+  button: {
+    borderColor: '#ccc',
+  },
+  buttonText: {
+    fontSize: 16,
+    color: '#007BFF',
+    marginBottom: 10,
+  },
+
+})
 export default SignInScreen;
