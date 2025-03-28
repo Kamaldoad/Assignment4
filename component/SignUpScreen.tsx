@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, Alert } from 'react-native';
+import {View,Text,TextInput,Alert,StyleSheet,TouchableOpacity} from 'react-native';
 import { supabase } from '../lib/supabase';
 
 const SignUpScreen = ({ navigation }: any) => {
@@ -13,7 +13,7 @@ const SignUpScreen = ({ navigation }: any) => {
       email,
       password,
       options: {
-        data: { firstName, lastName }, // Store names in user metadata
+        data: { firstName, lastName },
       },
     });
 
@@ -31,16 +31,97 @@ const SignUpScreen = ({ navigation }: any) => {
   };
 
   return (
-    <View>
-      <Text>Sign Up</Text>
-      <TextInput placeholder="First Name" value={firstName} onChangeText={setFirstName} />
-      <TextInput placeholder="Last Name" value={lastName} onChangeText={setLastName} />
-      <TextInput placeholder="Email" value={email} onChangeText={setEmail} />
-      <TextInput placeholder="Password" value={password} secureTextEntry onChangeText={setPassword} />
-      <Button title="Sign Up" onPress={handleSignUp} />
-      <Button title="Go to Sign In" onPress={() => navigation.navigate('SignIn')} />
+    <View style={styles.container}>
+      <View style={styles.inputContainer}>
+        <Text style={styles.title}>Sign Up</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="First Name"
+          value={firstName}
+          onChangeText={setFirstName}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Last Name"
+          value={lastName}
+          onChangeText={setLastName}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Email"
+          value={email}
+          onChangeText={setEmail}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Password"
+          value={password}
+          secureTextEntry
+          onChangeText={setPassword}
+        />
+      </View>
+
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.button} onPress={handleSignUp}>
+          <Text style={styles.buttonText}>Sign Up</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={[styles.button, styles.secondaryButton]} onPress={() => navigation.navigate('SignIn')}>
+          <Text style={[styles.buttonText, styles.secondaryButtonText]}>Back to Sign In</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingHorizontal: 20,
+    backgroundColor: '#fff',
+    justifyContent: 'center',
+  },
+  inputContainer: {
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: 24,
+    marginBottom: 20,
+    fontWeight: 'bold',
+  },
+  input: {
+    width: '100%',
+    height: 50,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 10,
+    marginBottom: 15,
+    paddingHorizontal: 12,
+    fontSize: 16,
+  },
+  buttonContainer: {
+    marginTop: 20,
+    alignItems: 'center',
+  },
+  button: {
+    width: '100%',
+    backgroundColor: '#007BFF',
+    paddingVertical: 14,
+    borderRadius: 10,
+    marginBottom: 12,
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '500',
+  },
+  secondaryButton: {
+    backgroundColor: '#eee',
+  },
+  secondaryButtonText: {
+    color: '#007BFF',
+  },
+});
 
 export default SignUpScreen;

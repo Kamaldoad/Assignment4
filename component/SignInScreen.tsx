@@ -63,11 +63,16 @@ const SignInScreen = ({ navigation }: any) => {
         <TextInput style={styles.input} placeholder="Email" value={email} onChangeText={setEmail} />
         <TextInput style={styles.input} placeholder="Password" value={password} secureTextEntry onChangeText={setPassword} />
       </View>
+      
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={handleSignIn} />
+        <TouchableOpacity style={styles.button} onPress={handleSignIn}>
         <Text style={styles.buttonText}>Sign In</Text>
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('SignUp')} />
-        <Text style={styles.buttonText}>Sign Up</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={[styles.button, styles.secondaryButton]} onPress={() => navigation.navigate('SignUp')}>
+        <Text style={[styles.buttonText, styles.secondaryButtonText]}>Sign Up</Text>
+        </TouchableOpacity>
+
       </View>
     </View>
 
@@ -103,13 +108,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   button: {
-    borderColor: '#ccc',
+    width: '100%',
+    backgroundColor: '#007BFF',
+    paddingVertical: 14,
+    borderRadius: 10,
+    marginBottom: 12,
+    alignItems: 'center',
   },
   buttonText: {
+    color: '#fff',
     fontSize: 16,
-    color: '#007BFF',
-    marginBottom: 10,
+    fontWeight: '500',
   },
+  
 
 })
 export default SignInScreen;
